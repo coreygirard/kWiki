@@ -18,10 +18,10 @@ def getBody(page):
     start = match.end()
     end = len(page)
 
-    for tag in [r'<a href="#See_also',
-                r'<a href="#Notes_and_references',
-                r'<a href="#Bibliography',
-                r'<a href="#External_links']:
+    for tag in [r'id="See_also',
+                r'id="Notes_and_references',
+                r'id="Bibliography',
+                r'id="External_links']:
         match = re.search(tag,page)
         if match:
             end = min(end,match.start())
@@ -88,7 +88,7 @@ def extractTitle(page):
 
 def extractSummary(page):
     '''
-    >>> with open('tests.html','r') as f:
+    >>> with open('tests.txt','r') as f:
     ...     page = f.read()
     >>> s = extractSummary(page)
     >>> s.startswith('Logic (from the Ancient Greek: ')
@@ -106,7 +106,7 @@ def extractSummary(page):
 
 def extractBody(page):
     '''
-    >>> with open('tests.html','r') as f:
+    >>> with open('tests.txt','r') as f:
     ...     page = f.read()
     >>> body = extractBody(page)
     >>> body.startswith('Logic (from the Ancient Greek: λογική, translit. ;logikḗ), originally meaning "the word" or "what is spoken" (but coming to mean "thought" or "reason"), is generally held to consist of the systematic study of the form of valid inference.')
