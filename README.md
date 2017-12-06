@@ -40,14 +40,16 @@ print(title)
 Software testing
 ```
 
-To get the article 'summary' (loosely defined as the first chunk of the article, usually up until the 'Contents' box:
+To get the article 'summary' (loosely defined as the first chunk of the article, usually up until the 'Contents' box):
 
 ```python
 summary = scrape.extractSummary(page)
 print(summary)
 ```
 ```
-Software testing is an investigation conducted to provide stakeholders with information about the quality of the software product or service under test. ... ... In contrast, under an Agile approach, requirements, programming, and testing are often done concurrently.
+Software testing is an investigation conducted to provide stakeholders with information about the
+quality of the software product or service under test. ... ... In contrast, under an Agile approach,
+requirements, programming, and testing are often done concurrently.
 ```
 
 To get the entire text of the article (currently defined as all visible text not in boxes after the title and before any "See also", "References", "Notes and references", "Bibliography", "Further reading", or "External Links" sections:
@@ -57,7 +59,9 @@ text = scrape.extractText(page)
 print(text)
 ```
 ```
-Software testing is an investigation conducted to provide stakeholders with information about the quality of the software product or service under test. ... ... By contrast, QA (quality assurance) is the implementation of policies and procedures intended to prevent defects from reaching customers.
+Software testing is an investigation conducted to provide stakeholders with information about the
+quality of the software product or service under test. ... ... By contrast, QA (quality assurance)
+is the implementation of policies and procedures intended to prevent defects from reaching customers.
 ```
 
 To get all links in the text of the article: (`text` is the text of the link itself, `title` is the text that appears on mouseover, and `url` is the destination)
