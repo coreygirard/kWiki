@@ -1,5 +1,8 @@
 # kWiki
 
+[![Build Status](https://travis-ci.org/crgirard/kWiki.svg?branch=master)](https://travis-ci.org/crgirard/kWiki) <br>
+[![Codecov](https://img.shields.io/codecov/c/github/crgirard/kWiki.svg)]()
+
 ### What
 
 This package aims to be a lightweight way to extract basic text from Wikipedia.
