@@ -5,7 +5,7 @@
 
 ### What
 
-This package aims to be a lightweight way to extract basic text from Wikipedia.
+**kWiki** (pronounced *'quickie'*) aims to be a lightweight way to extract basic text from Wikipedia.
 Zero dependencies! It can fetch a page's HTML and extract text and links.
 If you want anything fancier, check out [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/).
 
