@@ -1,17 +1,12 @@
-import requests
 import re
 
-def fetchPage(url):
+def makeUrl(url):
     '''
-    >>> page = fetchPage('Logic')
-    >>> type(page) == type('string')
-    True
-    >>> len(page) > 1000
-    True
+    >>> makeUrl('Logic')
+    'http://en.wikipedia.org/wiki/Logic'
     '''
 
-    page = requests.get('http://en.wikipedia.org/wiki/'+url).text
-    return page
+    return 'http://en.wikipedia.org/wiki/'+url
 
 def getBody(page):
     match = re.search(r'From Wikipedia, the free encyclopedia',page)
@@ -19,7 +14,9 @@ def getBody(page):
     end = len(page)
 
     for tag in [r'id="See_also',
+                r'id="References',
                 r'id="Notes_and_references',
+                r'id="Further_reading',
                 r'id="Bibliography',
                 r'id="External_links']:
         match = re.search(tag,page)
@@ -76,6 +73,9 @@ def cleanText(text):
     return text
 
 
+
+
+
 def extractTitle(page):
     '''
     >>> t = '<h1 id="firstHeading" class="firstHeading" lang="en">Logic</h1>            <div id="bodyContent" class="mw-body-content">              <div id="siteSub" class="noprint">From Wikipedia, the free encyclopedia</div>'
@@ -104,11 +104,11 @@ def extractSummary(page):
 
     return cleanText(body)
 
-def extractBody(page):
+def extractText(page):
     '''
     >>> with open('tests.txt','r') as f:
     ...     page = f.read()
-    >>> body = extractBody(page)
+    >>> body = extractText(page)
     >>> body.startswith('Logic (from the Ancient Greek: λογική, translit. ;logikḗ), originally meaning "the word" or "what is spoken" (but coming to mean "thought" or "reason"), is generally held to consist of the systematic study of the form of valid inference.')
     True
     '''
@@ -123,23 +123,23 @@ def extractLinks(page):
     >>> links = extractLinks(sample)
     >>> len(links)
     9
-    >>> links[0] == {'title': 'Inference', 'url': 'Inference', 'text': 'inference'}
+    >>> links[0] == {'text': 'inference', 'title': 'Inference', 'url': 'http://en.wikipedia.org/wiki/Inference'}
     True
-    >>> links[1] == {'title': 'Fallacies', 'url': 'Fallacies', 'text': 'fallacies'}
+    >>> links[1] == {'text': 'fallacies', 'title': 'Fallacies', 'url': 'http://en.wikipedia.org/wiki/Fallacies'}
     True
-    >>> links[2] == {'title': 'Semantics', 'url': 'Semantics', 'text': 'semantics'}
+    >>> links[2] == {'text': 'semantics', 'title': 'Semantics', 'url': 'http://en.wikipedia.org/wiki/Semantics'}
     True
-    >>> links[3] == {'title': 'Paradox', 'url': 'Paradox', 'text': 'paradoxes'}
+    >>> links[3] == {'text': 'paradoxes', 'title': 'Paradox', 'url': 'http://en.wikipedia.org/wiki/Paradox'}
     True
-    >>> links[4] == {'title': 'Philosophy', 'url': 'Philosophy', 'text': 'philosophy'}
+    >>> links[4] == {'text': 'philosophy', 'title': 'Philosophy', 'url': 'http://en.wikipedia.org/wiki/Philosophy'}
     True
-    >>> links[5] == {'title': 'Mathematics', 'url': 'Mathematics', 'text': 'mathematics'}
+    >>> links[5] == {'text': 'mathematics', 'title': 'Mathematics', 'url': 'http://en.wikipedia.org/wiki/Mathematics'}
     True
-    >>> links[6] == {'title': 'Computer science', 'url': 'Computer_science', 'text': 'computer science'}
+    >>> links[6] == {'text': 'computer science', 'title': 'Computer science', 'url': 'http://en.wikipedia.org/wiki/Computer_science'}
     True
-    >>> links[7] == {'title': 'Linguistics', 'url': 'Linguistics', 'text': 'linguistics'}
+    >>> links[7] == {'text': 'linguistics', 'title': 'Linguistics', 'url': 'http://en.wikipedia.org/wiki/Linguistics'}
     True
-    >>> links[8] == {'title': 'Psychology', 'url': 'Psychology', 'text': 'psychology'}
+    >>> links[8] == {'text': 'psychology', 'title': 'Psychology', 'url': 'http://en.wikipedia.org/wiki/Psychology'}
     True
     '''
 
@@ -147,14 +147,27 @@ def extractLinks(page):
     for m in re.finditer(r'<a href="/wiki/(.*?)".*?title="(.*?)".*?>(.*?)</a>',page):
         a,b,c = m.groups()
         if ':' not in a:
-            links.append({'url':a,'title':b,'text':c})
+            links.append({'url':'http://en.wikipedia.org/wiki/'+a,'title':b,'text':c})
     return links
 
+def splitIntoSentences(text):
+    sentenceDivider = '([.!?][\)]?) (?=[\(]?[A-Z])'
+    temp = []
+    s = re.split(sentenceDivider,text+' A')
+    for i in range(0,len(s)-1,2):
+        temp.append(s[i] + s[i+1])
+    return temp
+
+def splitIntoWords(sentence):
+    s = sentence.split(' ')
+    temp = []
+    for e in s:
+        temp += re.split(r'([,\(\).!?])',e)
+    return [e for e in temp if e != '']
+
 def splitText(text):
-    return re.split('[.!?]',text)
-
-
-
+    sentences = splitIntoSentences(text)
+    return [splitIntoWords(sentence) for sentence in sentences]
 
 
 
