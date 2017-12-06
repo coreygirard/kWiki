@@ -1,7 +1,7 @@
 # kWiki
 
 [![Build Status](https://travis-ci.org/crgirard/kWiki.svg?branch=master)](https://travis-ci.org/crgirard/kWiki) <br>
-[![Codecov](https://img.shields.io/codecov/c/github/crgirard/kWiki.svg)]()
+[![Codecov](https://img.shields.io/codecov/c/github/crgirard/kWiki.svg)](https://codecov.io/gh/crgirard/kWiki/)
 
 ### What
 
