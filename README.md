@@ -10,7 +10,7 @@ If you want anything fancier, check out [BeautifulSoup](https://www.crummy.com/s
 ### Why
 
 Wikipedia is an incredibly useful resource with relatively reliable formatting,
-but a few tricks are necessary to get the text. So I figured a modular minimalist parser
+but a few tricks are necessary to get at the good stuff. So I figured a modular minimalist parser
 might be useful for myself and others.
 
 
@@ -26,7 +26,7 @@ with open('testing.html','r') as f:
     page = f.read()
 ```
 
-**If you are planning to parse more than a few files, please use https://dumps.wikimedia.org/ instead of crawling.**
+**Note: if you are planning to parse more than a few files, use https://dumps.wikimedia.org/ instead of crawling.**
 
 To get the page's title:
 ```python
@@ -57,7 +57,7 @@ print(text)
 Software testing is an investigation conducted to provide stakeholders with information about the quality of the software product or service under test. ... ... By contrast, QA (quality assurance) is the implementation of policies and procedures intended to prevent defects from reaching customers.
 ```
 
-To get all links in the text of the article: ('text' is the text of the link itself, 'title' is the text that appears on mouseover, and 'url' is the destination)
+To get all links in the text of the article: (`text` is the text of the link itself, `title` is the text that appears on mouseover, and `url` is the destination)
 
 ```python
 links = scrape.extractLinks(page)
