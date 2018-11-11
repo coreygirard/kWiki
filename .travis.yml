@@ -1,8 +1,15 @@
 language: python
+
 python:
+  - "3.4"
+  - "3.5"
   - "3.6"
+  - "3.7-dev"
+
 script: coverage run tests.py
+
 before_install:
   pip install codecov coverage
+
 after_success:
   codecov --token=
