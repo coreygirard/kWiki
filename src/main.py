@@ -97,7 +97,7 @@ def extract_title(page):
 
 def extract_summary(page):
     """
-    >>> with open('tests.txt','r') as f:
+    >>> with open('tests/tests.txt','r') as f:
     ...     page = f.read()
     >>> s = extract_summary(page)
     >>> s.startswith('Logic (from the Ancient Greek: ')
@@ -116,7 +116,7 @@ def extract_summary(page):
 
 def extract_text(page):
     """
-    >>> with open('tests.txt','r') as f:
+    >>> with open('tests/tests.txt','r') as f:
     ...     page = f.read()
     >>> body = extract_text(page)
     >>> body.startswith('Logic (from the Ancient Greek:')

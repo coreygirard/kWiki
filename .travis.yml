@@ -6,10 +6,7 @@ python:
   - "3.6"
   - "3.7-dev"
 
-script: coverage run tests.py
+script: pytest -vv
 
-before_install:
-  pip install codecov coverage
-
-after_success:
-  codecov --token=
+install:
+  pip install pytest
